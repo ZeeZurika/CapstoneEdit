@@ -20,16 +20,12 @@ public class HomeController {
     @PostMapping("/select-role")
     public String handleRoleSelection(@RequestParam("role") String role) {
         // Redirect to role-specific page based on the role selected
-        switch (role) {
-            case "PATIENT":
-                return "redirect:/patient/appointments"; // Redirect to patient-specific page
-            case "DOCTOR":
-                return "redirect:/doctor/appointments"; // Redirect to doctor-specific page
-            case "ADMIN":
-                return "redirect:/admin/dashboard"; // Redirect to admin dashboard
-            default:
-                return "redirect:/home"; // Default redirect if no role is selected
-        }
+        return switch (role) {
+            case "PATIENT" -> "redirect:/patient/dashboard"; // Redirect to patient-specific page
+            case "DOCTOR" -> "redirect:/doctor/dashboard"; // Redirect to doctor-specific page
+            case "ADMIN" -> "redirect:/admin/dashboard"; // Redirect to admin dashboard
+            default -> "redirect:/home"; // Default redirect if no role is selected
+        };
     }
 }
 

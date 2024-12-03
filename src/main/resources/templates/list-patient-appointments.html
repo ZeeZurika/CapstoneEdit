@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Appointments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2 class="text-center">Your Appointments</h2>
+
+  <!-- Check if there are no appointments -->
+  <div th:if="${appointments.isEmpty()}">
+    <p class="text-center">You don't have any upcoming appointments.</p>
+  </div>
+
+  <!-- If there are appointments, show them in a table -->
+  <div th:unless="${appointments.isEmpty()}">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Appointment ID</th>
+        <th scope="col">Doctor</th>
+        <th scope="col">Date & Time</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="appointment : ${appointments}">
+        <td th:text="${appointment.id}"></td>
+        <td th:text="${appointment.doctor.name}"></td>
+        <td th:text="${#dates.format(appointment.dateTime, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${appointment.status}"></td>
+        <td>
+          <a th:href="@{/patient/appointments/cancel/{appointmentId}(appointmentId=${appointment.id})}"
+             class="btn btn-danger">Cancel</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <a href="/patient/dashboard" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor's Appointments</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h3>Appointments for Dr. <span th:text="${doctor.firstName} + ' ' + ${doctor.lastName}"></span></h3>
+    </div>
+    <div class="card-body">
+      <!-- Check if there are appointments -->
+      <div th:if="${appointments.isEmpty()}">
+        <p>No appointments scheduled for this doctor.</p>
+      </div>
+      <div th:unless="${appointments.isEmpty()}">
+        <table class="table table-bordered">
+          <thead>
+          <tr>
+            <th>Patient Name</th>
+            <th>Appointment Date and Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="appointment : ${appointments}">
+            <td th:text="${appointment.id}"></td>
+            <td><span th:text="${appointment.patient.firstName} + ' ' + ${appointment.patient.lastName}"></span></td>
+            <td><span th:text="${#dates.format(appointment.dateTime, 'yyyy-MM-dd HH:mm')}"></span></td>
+            <td><span th:text="${appointment.status}"></span></td>
+            <td>
+              <!-- View Appointment Details -->
+              <a th:href="@{'/appointments/details/' + ${appointment.id}}" class="btn btn-info">View Details</a>
+
+              <!-- Cancel Appointment (for Admin/Doctor) -->
+              <div th:if="${#authentication.principal.role == 'ADMIN' or #authentication.principal.role == 'DOCTOR'}">
+                <a th:href="@{'/appointments/cancel/' + ${appointment.id}}" class="btn btn-danger">Cancel</a>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Back Button -->
+      <a href="/appointments/list" class="btn btn-primary mt-3">Back to Appointments</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

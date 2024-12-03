@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,10 +22,15 @@ public class Report {
     private LocalDateTime generatedAt;
     private String reportData;
 
+    @OneToMany(mappedBy = "report")
+    private List<Appointment> appointments;
+
+
     public Report(String reportType, String generatedBy,
                   LocalDateTime generatedAt, String reportData) {
         this.reportType = reportType;
         this.generatedBy = generatedBy;
         this.generatedAt = generatedAt;
         this.reportData = reportData;
-    }}
+    }
+}

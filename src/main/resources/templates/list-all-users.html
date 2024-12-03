@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Users</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">All Users</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">User ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Email</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.firstName} + ' ' + ${user.lastName}"></td>
+                <td th:text="${user.role}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <a href="#" th:href="@{/admin/users/view/{id}(userId=${user.id})}" class="btn btn-info btn-sm">View</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <a href="#" class="btn btn-primary">Back to Dashboard</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
