@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Per Scholas Health Capstone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Welcome to Per Scholas Health Capstone</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Welcome Message -->
+                    <p class="text-center">We're glad you're here! Per Scholas Health Capstone is here to help you with your healthcare needs.</p>
+
+                    <!-- Role Selection Form -->
+                    <h5 class="text-center">Select your Role</h5>
+                    <form action="/home/select-role" method="POST" class="text-center">
+                        <div class="form-group">
+                            <input type="radio" id="patient" name="role" value="PATIENT" required>
+                            <label for="patient">Patient</label><br>
+                            <input type="radio" id="doctor" name="role" value="DOCTOR" required>
+                            <label for="doctor">Doctor</label><br>
+                            <input type="radio" id="admin" name="role" value="ADMIN" required>
+                            <label for="admin">Admin</label><br>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Continue</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
